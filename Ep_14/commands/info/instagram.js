@@ -13,8 +13,8 @@ module.exports = {
         const name = args.join(" ");
 
         if (!name) {
-            return message.reply("Maybe it's useful to actually search for someone...!")
-                .then(m => m.delete(5000));
+            return message.reply("You need to enter an instagram username")
+                
         }
 
         const url = `https://instagram.com/${name}/?__a=1`;
@@ -24,14 +24,14 @@ module.exports = {
         try {
             res = await fetch(url).then(url => url.json());
         } catch (e) {
-            return message.reply("I couldn't find that account... :(")
-                .then(m => m.delete(5000));
+            return message.reply("User not found")
+ 
         }
 
         const account = res.graphql.user;
 
         const embed = new RichEmbed()
-            .setColor("RANDOM")
+            .setColor("BLACK")
             .setTitle(account.full_name)
             .setURL(`https://instagram.com/${name}`)
             .setThumbnail(account.profile_pic_url_hd)
